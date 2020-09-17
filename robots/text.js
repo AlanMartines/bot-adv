@@ -70,8 +70,12 @@ async function robot() {
     content.sourceContentSanitized = withoutDatesInParentheses
 
     function removeBlankLinesAndMarkdown(text) {
+      if(typeof text === 'undefined'){
+        console.log('> [text-robot] Termo de pesquisa não localizado')
+        process.exit()
+      }
       const allLines = text.split('\n')
-
+      
       const withoutBlankLinesAndMarkdown = allLines.filter((line) => {
         if (line.trim().length === 0 || line.trim().startsWith('=')) {
           return false
